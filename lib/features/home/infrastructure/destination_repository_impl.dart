@@ -4,6 +4,8 @@ import 'package:easy_travel/features/home/domain/destination_repository.dart';
 class DestinationRepositoryImpl implements DestinationRepository {
   @override
   Future<List<Destination>> getDestinations() async {
+    await Future.delayed(Duration(seconds: 2));
+
     return [
       Destination(
         id: 1,

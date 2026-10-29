@@ -14,7 +14,6 @@ class HomeViewModel extends ChangeNotifier {
   Future<void> loadDestinations() async {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
-    await Future.delayed(Duration(seconds: 2));
 
     try {
       final destinations = await useCase.execute();
