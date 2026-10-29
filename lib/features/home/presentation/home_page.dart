@@ -16,14 +16,12 @@ class HomePage extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         }
 
-        return Expanded(
-          child: ListView.builder(
-            itemCount: viewModel.state.destinations.length,
-            itemBuilder: (context, index) {
-              Destination destination = viewModel.state.destinations[index];
-              return DestinationCard(destination: destination);
-            },
-          ),
+        return ListView.builder(
+          itemCount: viewModel.state.destinations.length,
+          itemBuilder: (context, index) {
+            Destination destination = viewModel.state.destinations[index];
+            return DestinationCard(destination: destination);
+          },
         );
       },
     );
