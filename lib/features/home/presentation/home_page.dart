@@ -1,5 +1,6 @@
 import 'package:easy_travel/features/home/domain/destination.dart';
 import 'package:easy_travel/features/home/presentation/destination_card.dart';
+import 'package:easy_travel/features/home/presentation/destination_detail_page.dart';
 import 'package:easy_travel/features/home/presentation/home_view_model.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,18 @@ class HomePage extends StatelessWidget {
           itemCount: viewModel.state.destinations.length,
           itemBuilder: (context, index) {
             Destination destination = viewModel.state.destinations[index];
-            return DestinationCard(destination: destination);
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        DestinationDetailPage(destination: destination),
+                  ),
+                );
+              },
+              child: DestinationCard(destination: destination),
+            );
           },
         );
       },

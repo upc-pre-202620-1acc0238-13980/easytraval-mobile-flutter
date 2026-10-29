@@ -7,49 +7,45 @@ class DestinationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-      },
-      child: Card(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(8.0)),
-              child: Image.network(destination.image,
-                width: double.infinity,
-                height: 200,
-                fit: BoxFit.cover,
-              ),
+    return Card(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(8.0)),
+            child: Image.network(destination.image,
+              width: double.infinity,
+              height: 200,
+              fit: BoxFit.cover,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    destination.title,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    destination.country,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  Row(
-                    spacing: 4,
-                    children: [
-                      Icon(Icons.star, color: Theme.of(context).colorScheme.primary, size: 16),
-                      Text(
-                        destination.rating.toString(),
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  destination.title,
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  destination.country,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Row(
+                  spacing: 4,
+                  children: [
+                    Icon(Icons.star, color: Theme.of(context).colorScheme.primary, size: 16),
+                    Text(
+                      destination.rating.toString(),
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
