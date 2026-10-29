@@ -14,10 +14,13 @@ class DestinationDetailPage extends StatelessWidget {
             expandedHeight: MediaQuery.of(context).size.height*0.25,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                destination.image,
-                width: double.infinity,
-                fit: BoxFit.cover
+              background: Hero(
+                tag: destination.id,
+                child: Image.network(
+                  destination.image,
+                  width: double.infinity,
+                  fit: BoxFit.cover
+                ),
               ),
             ),
           ),

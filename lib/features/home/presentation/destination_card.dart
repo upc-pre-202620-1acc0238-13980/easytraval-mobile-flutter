@@ -13,10 +13,13 @@ class DestinationCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.vertical(top: Radius.circular(8.0)),
-            child: Image.network(destination.image,
-              width: double.infinity,
-              height: 200,
-              fit: BoxFit.cover,
+            child: Hero(
+              tag: destination.id,
+              child: Image.network(destination.image,
+                width: double.infinity,
+                height: 200,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Padding(
