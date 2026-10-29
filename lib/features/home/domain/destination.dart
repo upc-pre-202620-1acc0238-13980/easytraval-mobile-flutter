@@ -5,7 +5,7 @@ class Destination {
   final String image;
   final double rating;
 
-  const Destination({
+  const new({
     required this.id,
     required this.title,
     required this.country,

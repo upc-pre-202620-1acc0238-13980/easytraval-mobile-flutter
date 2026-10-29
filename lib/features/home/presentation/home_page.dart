@@ -1,47 +1,38 @@
+import 'package:easy_travel/features/home/domain/destination.dart';
+import 'package:easy_travel/features/home/presentation/destination_card.dart';
 import 'package:easy_travel/features/home/presentation/home_view_model.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   final HomeViewModel viewModel;
   const new({super.key, required this.viewModel});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    widget.viewModel.loadDestinations();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: widget.viewModel,
-      builder: (context, child) {
-        HomeViewModel viewModel = widget.viewModel;
+    return Column(
 
-        if (viewModel.isLoading) {
-          return Center(child: CircularProgressIndicator());
-        }
+      children: [
+        ListenableBuilder(
+          listenable: viewModel,
+          builder: (context, child) {
 
-        return ListView.builder(
-          itemCount: viewModel.destinations.length,
-          itemBuilder: (context, index) => ListTile(
-            leading: ClipOval(
-              child: Image.network(
-                viewModel.destinations[index].image,
-                width: 48,
-                height: 48,
-                fit: BoxFit.cover,
+
+            if (viewModel.state.isLoading) {
+              return Expanded(child: Center(child: CircularProgressIndicator()));
+            }
+
+            return Expanded(
+              child: ListView.builder(
+                itemCount: viewModel.state.destinations.length,
+                itemBuilder: (context, index) {
+                  Destination destination = viewModel.state.destinations[index];
+                  return DestinationCard(destination: destination);
+                },
               ),
-            ),
-            title: Text(viewModel.destinations[index].title),
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ],
     );
   }
 }

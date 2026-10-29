@@ -1,22 +1,27 @@
 import 'package:easy_travel/features/home/application/get_destinations_use_case.dart';
-import 'package:easy_travel/features/home/domain/destination.dart';
+import 'package:easy_travel/features/home/presentation/home_state.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final GetDestinationsUseCase useCase;
-  HomeViewModel({required this.useCase});
+  new({required this.useCase}) {
+    loadDestinations();
+  }
 
-  List<Destination> destinations = [];
-  bool isLoading = false;
-  String? errorMessage;
+  HomeState _state = HomeState();
+  HomeState get state => _state;
 
   Future<void> loadDestinations() async {
-    isLoading = true;
+    _state = _state.copyWith(isLoading: true);
     notifyListeners();
     await Future.delayed(Duration(seconds: 2));
 
-    destinations = await useCase.execute();
-    isLoading = false;
+    try {
+      final destinations = await useCase.execute();
+      _state = _state.copyWith(destinations: destinations, isLoading: false);
+    } catch (e) {
+      _state = _state.copyWith(errorMessage: e.toString(), isLoading: false);
+    }
     notifyListeners();
   }
 }
