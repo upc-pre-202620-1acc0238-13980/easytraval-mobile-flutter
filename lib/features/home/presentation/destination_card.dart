@@ -35,6 +35,10 @@ class DestinationCard extends StatelessWidget {
                   destination.country,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
+                Text(
+                  destination.city,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
                 Row(
                   spacing: 4,
                   children: [

@@ -11,7 +11,7 @@ class DestinationDetailPage extends StatelessWidget {
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
-            expandedHeight: MediaQuery.of(context).size.height*0.25,
+            expandedHeight: MediaQuery.of(context).size.height * 0.25,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Hero(
@@ -19,13 +19,106 @@ class DestinationDetailPage extends StatelessWidget {
                 child: Image.network(
                   destination.image,
                   width: double.infinity,
-                  fit: BoxFit.cover
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
         ],
-        body: Text(destination.country),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 8,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    destination.title,
+                    style: Theme.of(context).textTheme.titleLarge
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    destination.country,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  Text(
+                    destination.city,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+
+                  Row(
+                    spacing: 4,
+                    children: [
+                      Icon(
+                        Icons.star,
+                        color: Theme.of(context).colorScheme.primary,
+                        size: 16,
+                      ),
+                      Text(
+                        destination.rating.toString(),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Overview',
+                    style: Theme.of(context).textTheme.titleMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    destination.overview,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Best Season',
+                    style: Theme.of(context).textTheme.titleMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    destination.bestSeason,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Type',
+                    style: Theme.of(context).textTheme.titleMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    destination.type,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
