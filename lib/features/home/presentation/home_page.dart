@@ -26,12 +26,23 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        DestinationDetailPage(destination: destination),
+                    builder: (context) => DestinationDetailPage(
+                      destination: destination,
+                      isFavorite: viewModel.isFavorite(destination.id),
+                      onToggleFavorite: () {
+                        viewModel.toggleFavoriteDestination(destination.id);
+                      },
+                    ),
                   ),
                 );
               },
-              child: DestinationCard(destination: destination),
+              child: DestinationCard(
+                destination: destination,
+                isFavorite: viewModel.isFavorite(destination.id),
+                onToggleFavorite: () {
+                  viewModel.toggleFavoriteDestination(destination.id);
+                },
+              ),
             );
           },
         );

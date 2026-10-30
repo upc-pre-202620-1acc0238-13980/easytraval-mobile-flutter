@@ -1,0 +1,52 @@
+import 'package:easy_travel/features/home/domain/destination.dart';
+import 'package:easy_travel/features/home/presentation/destination_card.dart';
+import 'package:easy_travel/features/home/presentation/destination_detail_page.dart';
+import 'package:easy_travel/features/home/presentation/home_view_model.dart';
+import 'package:flutter/material.dart';
+
+class FavoritesPage extends StatelessWidget {
+  final HomeViewModel viewModel;
+  const new({super.key, required this.viewModel});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListenableBuilder(
+      listenable: viewModel,
+      builder: (context, child) {
+        if (viewModel.state.isLoading) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        return ListView.builder(
+          itemCount: viewModel.favorites.length,
+          itemBuilder: (context, index) {
+            Destination destination = viewModel.favorites[index];
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DestinationDetailPage(
+                      destination: destination,
+                      isFavorite: viewModel.isFavorite(destination.id),
+                      onToggleFavorite: () {
+                        viewModel.toggleFavoriteDestination(destination.id);
+                      },
+                    ),
+                  ),
+                );
+              },
+              child: DestinationCard(
+                destination: destination,
+                isFavorite: viewModel.isFavorite(destination.id),
+                onToggleFavorite: () {
+                  viewModel.toggleFavoriteDestination(destination.id);
+                },
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}

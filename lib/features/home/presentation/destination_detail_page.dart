@@ -2,8 +2,15 @@ import 'package:easy_travel/features/home/domain/destination.dart';
 import 'package:flutter/material.dart';
 
 class DestinationDetailPage extends StatelessWidget {
-  const new({super.key, required this.destination});
+  const new({
+    super.key,
+    required this.destination,
+    required this.isFavorite,
+    required this.onToggleFavorite,
+  });
   final Destination destination;
+  final bool isFavorite;
+  final Function onToggleFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +18,16 @@ class DestinationDetailPage extends StatelessWidget {
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
+            actions: [
+              IconButton(
+                onPressed: () {
+                  onToggleFavorite();
+                },
+                icon: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_outline,
+                ),
+              ),
+            ],
             expandedHeight: MediaQuery.of(context).size.height * 0.25,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
@@ -65,7 +82,7 @@ class DestinationDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(
@@ -83,7 +100,7 @@ class DestinationDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-          Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

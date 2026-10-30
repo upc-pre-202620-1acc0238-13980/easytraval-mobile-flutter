@@ -1,4 +1,5 @@
 import 'package:easy_travel/core/service_locator.dart';
+import 'package:easy_travel/features/favorites/presentation/favorites_page.dart';
 import 'package:easy_travel/features/home/presentation/home_page.dart';
 import 'package:easy_travel/features/home/presentation/home_view_model.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,8 @@ class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
   final List<Widget> pages = [
     HomePage(viewModel: getIt<HomeViewModel>()),
-    Text('Favorites'),
-    Text('Profile')
+    FavoritesPage(viewModel: getIt<HomeViewModel>()),
+    Text('Profile'),
   ];
 
   @override
