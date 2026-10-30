@@ -1,6 +1,6 @@
 import 'package:easy_travel/features/home/domain/destination.dart';
 import 'package:easy_travel/features/home/domain/destination_repository.dart';
-import 'package:easy_travel/features/home/infrastructure/destination_mapper.dart';
+import 'package:easy_travel/features/home/infrastructure/mappers/destination_mapper.dart';
 import 'package:easy_travel/features/home/infrastructure/remote/destination_api.dart';
 import 'package:easy_travel/features/home/infrastructure/remote/destination_dto.dart';
 
