@@ -28,10 +28,7 @@ class FavoritesPage extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => DestinationDetailPage(
                       destination: destination,
-                      isFavorite: viewModel.isFavorite(destination.id),
-                      onToggleFavorite: () {
-                        viewModel.toggleFavoriteDestination(destination.id);
-                      },
+                      viewModel: viewModel,
                     ),
                   ),
                 );
