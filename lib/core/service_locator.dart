@@ -1,4 +1,9 @@
 import 'package:easy_travel/core/app_database.dart';
+import 'package:easy_travel/features/auth/application/login_use_case.dart';
+import 'package:easy_travel/features/auth/domain/auth_repository.dart';
+import 'package:easy_travel/features/auth/infrastructure/auth_repository_impl.dart';
+import 'package:easy_travel/features/auth/infrastructure/remote/auth_api.dart';
+import 'package:easy_travel/features/auth/presentation/login_view_model.dart';
 import 'package:easy_travel/features/favorites/application/get_favorites_use_case.dart';
 import 'package:easy_travel/features/favorites/application/toggle_favorite_use_case.dart';
 import 'package:easy_travel/features/favorites/domain/favorite_repository.dart';
@@ -48,5 +53,19 @@ void setupDependencies() {
       getFavorites: getIt<GetFavoritesUseCase>(),
       toggleFavorite: getIt<ToggleFavoriteUseCase>(),
     ),
+  );
+
+  getIt.registerLazySingleton<AuthApi>(() => AuthApi());
+
+  getIt.registerLazySingleton<AuthRepository>(
+    () => AuthRepositoryImpl(api: getIt<AuthApi>()),
+  );
+
+  getIt.registerLazySingleton<LoginUseCase>(
+    () => LoginUseCase(repository: getIt<AuthRepository>()),
+  );
+
+  getIt.registerLazySingleton<LoginViewModel>(
+    () => LoginViewModel(login: getIt<LoginUseCase>()),
   );
 }
