@@ -1,4 +1,6 @@
 import 'package:easy_travel/core/app_database.dart';
+import 'package:easy_travel/core/secure_token_storage.dart';
+import 'package:easy_travel/core/token_storage.dart';
 import 'package:easy_travel/features/auth/application/login_use_case.dart';
 import 'package:easy_travel/features/auth/domain/auth_repository.dart';
 import 'package:easy_travel/features/auth/infrastructure/auth_repository_impl.dart';
@@ -14,6 +16,7 @@ import 'package:easy_travel/features/home/domain/destination_repository.dart';
 import 'package:easy_travel/features/home/infrastructure/destination_repository_impl.dart';
 import 'package:easy_travel/features/home/infrastructure/remote/destination_api.dart';
 import 'package:easy_travel/features/home/presentation/home_view_model.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -58,7 +61,10 @@ void setupDependencies() {
   getIt.registerLazySingleton<AuthApi>(() => AuthApi());
 
   getIt.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(api: getIt<AuthApi>()),
+    () => AuthRepositoryImpl(
+      api: getIt<AuthApi>(),
+      storage: getIt<TokenStorage>(),
+    ),
   );
 
   getIt.registerLazySingleton<LoginUseCase>(
@@ -67,5 +73,12 @@ void setupDependencies() {
 
   getIt.registerLazySingleton<LoginViewModel>(
     () => LoginViewModel(login: getIt<LoginUseCase>()),
+  );
+
+  getIt.registerLazySingleton<FlutterSecureStorage>(
+    () => FlutterSecureStorage(),
+  );
+  getIt.registerLazySingleton<TokenStorage>(
+    () => SecureTokenStorage(storage: getIt<FlutterSecureStorage>()),
   );
 }
